@@ -1,20 +1,34 @@
-<h1>Create Task</h1>
+@extends('layouts.app')
 
-<form action="/tasks" method="POST">
+@section('content')
+
+<h1 class="text-2xl font-bold mb-6">Create Task</h1>
+
+<form action="/tasks" method="POST" class="space-y-4">
     @csrf
 
-    <label>Title:</label><br>
-    <input type="text" name="title"><br><br>
+    <div>
+        <label class="block mb-1 font-semibold">Title</label>
+        <input type="text" name="title" class="w-full border p-2 rounded">
+    </div>
 
-    <label>Description:</label><br>
-    <textarea name="description"></textarea><br><br>
+    <div>
+        <label class="block mb-1 font-semibold">Description</label>
+        <textarea name="description" class="w-full border p-2 rounded"></textarea>
+    </div>
 
-    <label>
-        <input type="checkbox" name="is_completed" value="1">
-        Completed
-    </label><br><br>
+    <div>
+        <label class="inline-flex items-center">
+            <input type="checkbox" name="is_completed" value="1" class="mr-2">
+            Completed
+        </label>
+    </div>
 
-    <button type="submit">Save</button>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+        Save
+    </button>
 </form>
 
-<a href="/tasks">Back</a>
+<a href="/tasks" class="inline-block mt-4 text-blue-600">Back</a>
+
+@endsection
