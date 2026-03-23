@@ -2,6 +2,7 @@
 
 @section('content')
 
+<script src="https://cdn.tailwindcss.com"></script>
 <h1 class="text-2xl font-bold mb-6">Create Task</h1>
 
 <form action="/tasks" method="POST" class="space-y-4">

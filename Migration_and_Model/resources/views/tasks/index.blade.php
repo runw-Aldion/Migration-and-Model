@@ -2,6 +2,7 @@
 
 @section('content')
 
+<script src="https://cdn.tailwindcss.com"></script>
 <h1 class="text-3xl font-bold mb-6">Task List</h1>
 <h1 class="text-5xl text-red-500 font-bold">TEST TAILWIND</h1>
 @if(session('success'))

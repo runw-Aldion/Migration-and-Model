@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<script src="https://cdn.tailwindcss.com"></script>
 <h1 class="text-2xl font-bold mb-4">Task Details</h1>
 
 <div class="border p-4 rounded bg-gray-50">

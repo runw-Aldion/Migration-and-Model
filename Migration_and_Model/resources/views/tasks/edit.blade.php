@@ -2,6 +2,7 @@
 
 @section('content')
 
+<script src="https://cdn.tailwindcss.com"></script>
 <h1 class="text-2xl font-bold mb-6">Edit Task</h1>
 
 <form action="/tasks/{{ $task->id }}" method="POST" class="space-y-4">
