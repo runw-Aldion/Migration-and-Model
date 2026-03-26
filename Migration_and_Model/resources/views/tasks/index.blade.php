@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
 <script src="https://cdn.tailwindcss.com"></script>
-<h1 class="text-3xl font-bold mb-6">Task List</h1>
-<h1 class="text-5xl text-red-500 font-bold">TEST TAILWIND</h1>
+<h1 class="text-6xl font-bold text-red-500 mb-6">TAILWIND TEST</h1>
 @if(session('success'))
     <p class="mb-4 text-green-600">{{ session('success') }}</p>
 @endif

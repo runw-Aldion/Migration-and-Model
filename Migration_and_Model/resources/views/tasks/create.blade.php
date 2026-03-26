@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <script src="https://cdn.tailwindcss.com"></script>
 <h1 class="text-2xl font-bold mb-6">Create Task</h1>
 
@@ -16,13 +15,6 @@
     <div>
         <label class="block mb-1 font-semibold">Description</label>
         <textarea name="description" class="w-full border p-2 rounded"></textarea>
-    </div>
-
-    <div>
-        <label class="inline-flex items-center">
-            <input type="checkbox" name="is_completed" value="1" class="mr-2">
-            Completed
-        </label>
     </div>
 
     <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
