@@ -17,8 +17,10 @@
         <textarea name="description" class="w-full border p-2 rounded"></textarea>
     </div>
 
-    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
-        Save
+    <button>
+        <a href="/tasks" type="submit" class="bg-green-500 text-white px-4 py-2 rounded">    
+            Save
+        </a>
     </button>
 </form>
 
