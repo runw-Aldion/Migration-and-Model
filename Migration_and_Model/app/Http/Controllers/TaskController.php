@@ -30,7 +30,12 @@ class TaskController extends Controller
 
         Task::create($validated);
 
-        return redirect('/tasks')
+        // FIXED: Changed redirect('/tasks') to redirect()->route('tasks.index')
+        // redirect('/tasks') builds the URL using APP_URL + port which causes
+        // port doubling in Codespaces (e.g. ...8000.app.github.dev:8000/tasks)
+        // redirect()->route('tasks.index') uses Laravel's named route system
+        // which correctly resolves the URL without duplicating the port
+        return redirect()->route('tasks.index')
             ->with('success', 'Task created successfully.');
     }
 
@@ -56,7 +61,10 @@ class TaskController extends Controller
 
         $task->update($validated);
 
-        return redirect('/tasks')
+        // FIXED: Same reason as store() above
+        // redirect('/tasks') was causing port doubling after updating a task
+        // redirect()->route('tasks.index') resolves correctly in Codespaces
+        return redirect()->route('tasks.index')
             ->with('success', 'Task updated successfully.');
     }
 
@@ -64,7 +72,10 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return redirect('/tasks')
+        // FIXED: Same reason as store() and update() above
+        // redirect('/tasks') was causing port doubling after deleting a task
+        // redirect()->route('tasks.index') resolves correctly in Codespaces
+        return redirect()->route('tasks.index')
             ->with('success', 'Task deleted successfully.');
     }
 }

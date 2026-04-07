@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://cdn.tailwindcss.com"></script>
 <h1 class="text-2xl font-bold mb-6">Create Task</h1>
 
 <form action="/tasks" method="POST" class="space-y-4">
@@ -17,10 +16,8 @@
         <textarea name="description" class="w-full border p-2 rounded"></textarea>
     </div>
 
-    <button>
-        <a href="/tasks" type="submit" class="bg-green-500 text-white px-4 py-2 rounded">    
-            Save
-        </a>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+        Save
     </button>
 </form>
 
