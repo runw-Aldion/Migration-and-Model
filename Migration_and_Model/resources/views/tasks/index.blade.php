@@ -1,42 +1,85 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="text-6xl font-bold text-red-500 mb-6">TAILWIND TEST</h1>
+
+<!-- Header -->
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-3xl font-bold text-slate-800">Task List</h1>
+    </div>
+
+    <a href="/tasks/create"
+       class="bg-sky-600 text-white px-4 py-2 rounded-lg shadow hover:bg-sky-700 transition">
+        + Create Task
+    </a>
+</div>
+
+<!-- Success Message -->
 @if(session('success'))
-    <p class="mb-4 text-green-600">{{ session('success') }}</p>
+    <div class="mb-6 bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg">
+        {{ session('success') }}
+    </div>
 @endif
 
-<a href="/tasks/create" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">
-    Create New Task
-</a>
-
-<ul class="space-y-4">
+<!-- Task List -->
+<div class="space-y-4">
     @forelse($tasks as $task)
-        <li class="border p-4 rounded bg-gray-50">
-            <strong class="text-lg">{{ $task->title }}</strong>
-            <p>{{ $task->description }}</p>
+        <div class="bg-white border border-slate-200 rounded-xl shadow p-5">
 
-            <p class="mt-2">
-                Status:
-                <span class="{{ $task->is_completed ? 'text-green-600' : 'text-yellow-600' }}">
-                    {{ $task->is_completed ? 'Completed' : 'Pending' }}
-                </span>
-            </p>
-
-            <div class="mt-3 space-x-2">
-                <a href="/tasks/{{ $task->id }}" class="text-blue-600">View</a>
-                <a href="/tasks/{{ $task->id }}/edit" class="text-yellow-600">Edit</a>
-
-                <form action="/tasks/{{ $task->id }}" method="POST" class="inline">
+            <!-- Title + Status -->
+            <div class="flex items-start justify-between">
+                <div>
+                    <h2 class="text-lg font-semibold text-slate-800">
+                        {{ $task->title }}
+                    </h2>
+                    <p class="text-slate-500 mt-1">
+                        {{ $task->description ?: 'No description provided.' }}
+                    </p>
+                </div>
+                <form action="{{ route('tasks.toggle', $task->id) }}" method="POST">
                     @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-600">Delete</button>
+                    @method('PATCH')
+
+                    <button type="submit"
+                        class="text-sm font-medium px-3 py-1 rounded-full transition cursor-pointer
+                        {{ $task->is_completed 
+                            ? 'bg-green-100 text-green-700 hover:bg-green-200' 
+                            : 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200' }}">
+                        {{ $task->is_completed ? 'Completed' : 'Pending' }}
+                    </button>
                 </form>
             </div>
-        </li>
+
+            <!-- Actions -->
+            <div class="mt-5 flex items-center gap-3">
+
+                <a href="/tasks/{{ $task->id }}"
+                   class="px-3 py-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    View
+                </a>
+
+                <a href="/tasks/{{ $task->id }}/edit"
+                   class="px-3 py-2 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200">
+                    Edit
+                </a>
+
+                <form action="/tasks/{{ $task->id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="px-3 py-2 rounded-lg bg-red-100 text-red-700 hover:bg-red-200">
+                        Delete
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
     @empty
-        <p>No tasks found.</p>
+        <div class="bg-white border border-slate-200 rounded-xl shadow p-8 text-center">
+            <p class="text-slate-500 text-lg">No tasks yet.</p>
+        </div>
     @endforelse
-</ul>
+</div>
 
 @endsection
